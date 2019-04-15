@@ -1,0 +1,4 @@
+---
+default_context:
+  module_name: aws-ecs-vpc
+  template_version: 0.1

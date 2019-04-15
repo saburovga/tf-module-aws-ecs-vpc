@@ -1,0 +1,31 @@
+image: leandelivery/docker-terraform-ci
+
+stages:
+  - test
+
+terraform:
+  stage: test
+  script:
+    - terraform init
+    - terraform fmt -check=true
+    - terraform validate -check-variables=false
+
+readme-validator:
+  stage: test
+  script:
+    - tf_readme_validator.py
+
+cred-alert:
+  stage: test
+  script:
+    - cred-alert scan -f .
+
+tflint:
+  stage: test
+  script:
+    - tflint --error-with-issues
+
+terrascan:
+  stage: test
+  script:
+    - terrascan --location . --test all
